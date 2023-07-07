@@ -5,19 +5,15 @@ import 'package:home_devices/utils/home_page_utils/home_device_tile.dart';
 import 'package:home_devices/utils/drawer_utils/my_drawer.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       drawer: const MyDrawer(),
       backgroundColor: homeBackground,
       body: Center(
@@ -35,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          _scaffoldKey.currentState!.openDrawer();
+                          scaffoldKey.currentState!.openDrawer();
                         },
                         child: Image.network(
                           'https://cdn-icons-png.flaticon.com/128/10289/10289962.png',
@@ -96,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, value, child) => GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: value.smartDeviceList().length,
+                          itemCount: value.smartDeviceList.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   mainAxisSpacing: 15,
@@ -104,13 +100,10 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisCount: 2,
                                   childAspectRatio: 1 / 1.4),
                           itemBuilder: (context, index) {
-                            final device = value.smartDeviceList()[index];
                             return HomeDeviceTile(
-                              device: value.smartDeviceList()[index],
-                              onChanged: (value) {
-                                setState(() {
-                                  device.togglePower();
-                                });
+                              device: value.smartDeviceList[index],
+                              onChanged: (values) {
+                                value.toggleDevicePower(index);
                               },
                             );
                           }))

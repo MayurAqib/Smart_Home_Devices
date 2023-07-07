@@ -8,14 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../provider/conditions_provider.dart';
 
-class DevicesPage extends StatefulWidget {
+class DevicesPage extends StatelessWidget {
   const DevicesPage({super.key});
 
-  @override
-  State<DevicesPage> createState() => _DevicesPageState();
-}
-
-class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
     final condition = Provider.of<ConditionsProvider>(context);
@@ -28,6 +23,9 @@ class _DevicesPageState extends State<DevicesPage> {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
             child: Column(
               children: [
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -92,25 +90,26 @@ class _DevicesPageState extends State<DevicesPage> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                if (condition.devicePower == false) const SizedBox(height: 485),
+                if (condition.devicePower == false) const SizedBox(height: 630),
                 if (condition.devicePower == true)
                   Consumer<DeviceProvider>(builder: (context, value, child) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: value.smartDeviceList().length,
-                      itemBuilder: (context, index) {
-                        final device = value.smartDeviceList()[index];
-                        return DeviceListTile(
-                          device: device,
-                          onChanged: (value) {
-                            setState(() {
-                              device.togglePower();
-                            });
-                          },
-                        );
-                      },
+                    return SizedBox(
+                      height: 630,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: value.smartDeviceList.length,
+                        itemBuilder: (context, index) {
+                          final device = value.smartDeviceList[index];
+                          return DeviceListTile(
+                            device: device,
+                            onChanged: (values) {
+                              value.toggleDevicePower(index);
+                            },
+                          );
+                        },
+                      ),
                     );
                   })
               ],

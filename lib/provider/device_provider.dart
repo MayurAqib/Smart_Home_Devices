@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_devices/provider/device_model.dart';
 
 class DeviceProvider extends ChangeNotifier {
-  static List<DeviceModel> smartDevices = [
+  List<DeviceModel> smartDevices = [
     DeviceModel(
         deviceName: 'Smart Light',
         deviceUrl: 'https://cdn-icons-png.flaticon.com/128/10847/10847857.png',
@@ -21,7 +21,12 @@ class DeviceProvider extends ChangeNotifier {
         power: false),
   ];
 
-  List<DeviceModel> smartDeviceList() {
-    return smartDevices;
+  List<DeviceModel> get smartDeviceList => smartDevices;
+
+  void toggleDevicePower(int index) {
+    if (index >= 0 && index < smartDevices.length) {
+      smartDevices[index].togglePower();
+      notifyListeners();
+    }
   }
 }

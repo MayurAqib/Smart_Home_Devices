@@ -7,14 +7,9 @@ import 'package:home_devices/utils/living_room_utils/statistics.dart';
 import 'package:home_devices/utils/living_room_utils/temperature_details.dart';
 import 'package:provider/provider.dart';
 
-class LivingRoom extends StatefulWidget {
+class LivingRoom extends StatelessWidget {
   const LivingRoom({super.key});
 
-  @override
-  State<LivingRoom> createState() => _LivingRoomState();
-}
-
-class _LivingRoomState extends State<LivingRoom> {
   @override
   Widget build(BuildContext context) {
     final conditions = Provider.of<ConditionsProvider>(context);
