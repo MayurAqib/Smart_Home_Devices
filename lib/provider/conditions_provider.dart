@@ -7,22 +7,23 @@ class ConditionsProvider extends ChangeNotifier {
   bool isSelectCooling = false;
   bool isSelectAirwave = false;
   bool devicePower = true;
-
   double temp = 22;
+
+  //todo: SELECT TEMPERATURE TILE
   void selectTemp() {
     isSelectStats = false;
     isSelectTemp = true;
-
     notifyListeners();
   }
 
+  //todo: SELECT STATISTICS TILE
   void selectStats() {
     isSelectStats = true;
     isSelectTemp = false;
-
     notifyListeners();
   }
 
+  //todo: SELECT HEATING TILE
   void selectHeating() {
     isSelectHeating = true;
     isSelectCooling = false;
@@ -31,6 +32,7 @@ class ConditionsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //todo: SELECT COOLING TILE
   void selectCooling() {
     isSelectHeating = false;
     isSelectCooling = true;
@@ -39,6 +41,7 @@ class ConditionsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //todo: SELECT AIRWAVE TILE
   void selectAirwave() {
     isSelectHeating = false;
     isSelectCooling = false;
@@ -47,6 +50,7 @@ class ConditionsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //todo: POWER SWITCH
   void toggleDevicePower() {
     devicePower = !devicePower;
     notifyListeners();
