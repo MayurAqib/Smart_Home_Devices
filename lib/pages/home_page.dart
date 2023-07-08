@@ -16,11 +16,12 @@ class HomePage extends StatelessWidget {
       key: scaffoldKey,
       drawer: const MyDrawer(),
       backgroundColor: homeBackground,
-      body: Center(
-        child: SafeArea(
+      body: SafeArea(
+        child: Center(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(
+                vertical: 20,
                 horizontal: 25,
               ),
               child: Column(
